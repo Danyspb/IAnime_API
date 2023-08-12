@@ -1,29 +1,23 @@
-const axios = require('axios');
-const fs = require("fs");
-const cheerio = require('cheerio');
+const express = require('express')
+const app = express();
+const port = 3000;
+const morgan = require('morgan');
+const cors = require('cors');
 
-const url = "https://www.ianimes.org/index.php";
-const moviesData = {};
 
-async function main() {
-    const {data : html} = await axios.get(url);
-    return html
-    
-}
+////////////////////////
+app.use(cors());
+app.options('*', cors());
+///////////////////////////
 
-main().then((res) =>{
-    const $ = cheerio.load(res)
-    $('#menu-platforms-menu>li').each((i,movi)=>{
-        const test = $(movi).find('a strong').text();
-        const cat = $(movi).find('a').text();
-        moviesData[test] = cat;
-    });
 
-    fs.writeFile('moviesData.json', JSON.stringify(moviesData), (err)=>{
-        if(err){
-            throw err;
-        }else{
-            console.log("file success");
-        }
-    })
+
+app.use(morgan('dev'));
+
+////////////////////////
+
+
+app.get('/', (req, res) => {
+  res.send('server Running well !!!!')
 })
+app.listen(port, () => console.log(`tape sur le port: ${port}!`))

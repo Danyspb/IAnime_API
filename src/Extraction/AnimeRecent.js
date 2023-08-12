@@ -1,6 +1,7 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const { RecentAnimeLink, Domaine } = require('../Liens/AnimeLink');
+const { RecentModel } = require('../Model/RecentModel');
 
 
 const url = RecentAnimeLink;
@@ -22,6 +23,18 @@ async function RecentAnime(){
         const type = $(inf).find('font[color="#008080"]').eq(1).text();
         const result = {titre , image, lien, episode, type}
         dataAnime.push(result);
+
+        //////// mettres ces donnes dans notre base de donnes////////
+        const SortieRecent = new RecentModel({
+            titre: titre,
+            image :image,
+            lien: lien,
+            episode:episode,
+            type:type
+        })
+        SortieRecent.save();
+        ///////////////////////////////////////////////
+
        });
        return dataAnime;
     }catch (err){

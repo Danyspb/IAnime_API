@@ -21,6 +21,7 @@ async function RecentAnime(){
         const lien = `${Domaine}${lienText}`;
         const episode = $(inf).find('font[color="#FF4500"]').text();
         const type = $(inf).find('font[color="#008080"]').eq(1).text();
+
         const result = {titre , image, lien, episode, type}
         dataAnime.push(result);
 
@@ -34,7 +35,6 @@ async function RecentAnime(){
         })
         SortieRecent.save();
         ///////////////////////////////////////////////
-
        });
        return dataAnime;
     }catch (err){

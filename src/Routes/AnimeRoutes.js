@@ -1,10 +1,12 @@
- const express = require('express');
- const router = express.Router()
+const express = require('express');
+const RecentAnime = require('../Extraction/AnimeRecent');
+const router = express.Router();
 
 
-router.get(`/home`,(req, res)=>{
+router.get(`/recent`,async(req, res)=>{
     try{
-        res.status(200).json({succes: true, message: 'Donnes recus avec succes'})
+        const data = await RecentAnime();
+        res.status(200).json({succes: true, data})
     }catch{
         if(res.status(400)){
             return res.json({succes: false, message: 'erreur aucun fichier trouver '})

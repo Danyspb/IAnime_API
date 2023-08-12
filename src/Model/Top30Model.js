@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 
-
-
 const Top30Schema = new mongoose.Schema({
     titre: String,
     image: String,

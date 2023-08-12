@@ -1,6 +1,7 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const { TopAnime, Domaine } = require('../Liens/AnimeLink');
+const { Top30Model } = require('../Model/Top30Model');
 
 
 const url = TopAnime;
@@ -19,9 +20,24 @@ async function LesTop30Animes(){
             const type = $(crap).find('div img').attr('title').match(/(VF|VOSTFR)/gm).toString();
             const result = { titre, image, lien, type }
             dataAnime.push(result);
+
+            const Top30Anime = new Top30Model({
+                titre: titre,
+                image: image,
+                lien: lien ,
+                type :type
+
+            })
+            Top30Anime.save()
+
         });
+        return dataAnime;
 
     }catch(err){
         throw err
     }
 }
+
+LesTop30Animes();
+
+module.exports = LesTop30Animes;

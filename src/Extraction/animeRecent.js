@@ -9,18 +9,22 @@ const dataAnime = {};
 async function Recntanime() {
     const {data : html} = await axios.get(url);
     return html
-    
+
 }
 
 Recntanime().then((res) =>{
     const $ = cheerio.load(res)
-    $('#menu-platforms-menu>li').each((i,movi)=>{
-        const test = $(movi).find('a strong').text();
-        const cat = $(movi).find('a').text();
-        moviesData[test] = cat;
-    });
+    $('center td[align="center"]').each((i,inf)=>{
+        const titre = $(inf).find('td[colspan="3"] span').text();
+        const image = $(inf).find('div').css('background').match(/http.*(jpg|png|jpeg)/gm);
+        const lien = $(inf).find('a').attr('href');
+        const numero = $(inf).find('font[color="#FF4500"]').text();
+        const episode = `episode ${numero}`;
+        const type = $(inf).find('font[color="#008080"]').eq(1).text();
+        dataAnime[titre, image, lien, episode, type]
+       });
 
-    fs.writeFile('moviesData.json', JSON.stringify(moviesData), (err)=>{
+    fs.writeFile('moviesData.json', JSON.stringify(dataAnime), (err)=>{
         if(err){
             throw err;
         }else{

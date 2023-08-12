@@ -18,6 +18,6 @@ app.use(morgan('dev'));
 
 
 app.get('/', (req, res) => {
-  res.send('server Running well !!!!')
+  res.send('server is Running well !!!!')
 })
-app.listen(port, () => console.log(`tape sur le port: ${port}!`))
+app.listen(port, () => console.log(`server marche sur le port: ${port}!`))

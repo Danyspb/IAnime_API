@@ -14,10 +14,10 @@ async function RecentAnime(){
     const $ = cheerio.load(donnes.data)
 
     $('center td[align="center"]').each((i,inf)=>{
-        
+        const AnimeId = $(inf).find('a').attr('href').match(/(\d+)/gm).toString();
         const titre = $(inf).find('td[colspan="3"] span').text();
         const image =  $(inf).find('div').css('background').match(/http.*(jpg|png|jpeg|webp)/gm).toString();
-        const lienText = $(inf).find('a').attr('href');
+        const lienText = $(inf).find('a').attr('href').match(/(\d+)/gm);
         const lien = `${Domaine}${lienText}`;
         const episode = $(inf).find('font[color="#FF4500"]').text();
         const type = $(inf).find('font[color="#008080"]').eq(1).text();
@@ -27,6 +27,7 @@ async function RecentAnime(){
 
         //////// mettres ces donnes dans notre base de donnes////////
         const SortieRecent = new RecentModel({
+            AnimeId: AnimeId,
             titre: titre,
             image :image,
             lien: lien,

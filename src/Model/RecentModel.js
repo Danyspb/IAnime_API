@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 
 const RecentSchema = new mongoose.Schema({
-    titre:{
-        type: String,
-        unique: true
+    AnimeId: {
+        type : Number,
+        unique : true
     },
+    titre: String,
     image: String,
     lien: String,
     episode: Number,

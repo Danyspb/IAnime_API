@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const Top30Schema = new mongoose.Schema({
+    AnimeId: {
+        type : Number,
+        unique : true
+    },
     titre: String,
     image: String,
     lien: String,

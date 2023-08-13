@@ -13,6 +13,7 @@ async function LesTop30Animes(){
         const $ = cheerio.load(donnes.data)
 
         $('table[width="214"] tbody').each((i,crap)=>{
+            const animeId = $(crap).find('a').attr('href').match(/(\d+)/gm).toString();
             const titre = $(crap).find('span').text();
             const image = $(crap).find('div').css('background').match(/http.*(jpg|png|jpeg|webp)/gm).toString();
             const lienText = $(crap).find('a').attr('href');
@@ -22,6 +23,7 @@ async function LesTop30Animes(){
             dataAnime.push(result);
 
             const Top30Anime = new Top30Model({
+                animeId: animeId,
                 titre: titre,
                 image: image,
                 lien: lien ,

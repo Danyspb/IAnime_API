@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Top30Schema = new mongoose.Schema({
     AnimeId: {
-        type : Number,
+        type: Number,
         unique: true
     },
     Titre: String,
@@ -11,11 +11,11 @@ const Top30Schema = new mongoose.Schema({
     Type: String
 })
 
-Top30Schema.virtual('id').get(function(){
+Top30Schema.virtual('id').get(function () {
     return this._id.toHexString();
 });
 
-Top30Schema.set('toJSON',{
+Top30Schema.set('toJSON', {
     virtuals: true,
 });
 

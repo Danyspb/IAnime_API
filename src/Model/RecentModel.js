@@ -2,21 +2,21 @@ const mongoose = require('mongoose');
 
 const RecentSchema = new mongoose.Schema({
     AnimeId: {
-        type : Number,
-        unique : true
+        type: Number,
+        unique: true
     },
-    titre: String,
-    image: String,
-    lien: String,
-    episode: Number,
-    type: String
+    Titre: String,
+    Image: String,
+    Lien: String,
+    Episode: Number,
+    Type: String
 })
 
-RecentSchema.virtual('id').get(function(){
+RecentSchema.virtual('id').get(function () {
     return this._id.toHexString();
 });
 
-RecentSchema.set('toJSON',{
+RecentSchema.set('toJSON', {
     virtuals: true,
 });
 

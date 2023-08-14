@@ -27,7 +27,6 @@ async function LesTop30Animes() {
                 type
             }
             dataAnime.push(result)
-
             const info = await Top30Model.find({
                 AnimeId
             });
@@ -60,8 +59,7 @@ async function LesTop30Animes() {
                                     Lien: lien,
                                     Type: type,
                                 }
-                            },
-                            upsert: true
+                            }
                         }
                     }])
                 }
@@ -69,7 +67,6 @@ async function LesTop30Animes() {
             }
         });
         return dataAnime;
-
     } catch (err) {
         throw err
     }

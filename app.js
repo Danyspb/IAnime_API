@@ -5,6 +5,9 @@ const cors = require('cors');
 const mongose = require('mongoose');
 
 
+
+
+
 ////////////////////////
 app.use(cors());
 app.options('*', cors())
@@ -39,6 +42,13 @@ mongose.connect('mongodb://127.0.0.1:27017/Ianime')
     console.log(err);
 })
 
+
+
+
+
+
+
+/////////////////////////////////////////////
 
 app.get('/', (req, res)=>{
     res.send("Welcome to my IAnime API")

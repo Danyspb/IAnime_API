@@ -19,7 +19,7 @@ async function LesTop30Animes(){
             const lienText = $(crap).find('a').attr('href');
             const lien = `${Domaine}${lienText}`;
             const type = $(crap).find('div img').attr('title').match(/(VF|VOSTFR)/gm).toString();
-            const result = { titre, image, lien, type }
+            const result = { animeId, titre, image, lien, type }
             dataAnime.push(result);
 
             const Top30Anime = new Top30Model({
@@ -30,7 +30,8 @@ async function LesTop30Animes(){
                 type :type
 
             })
-            Top30Anime.save()
+            
+            // Top30Anime.save()
 
         });
         return dataAnime;

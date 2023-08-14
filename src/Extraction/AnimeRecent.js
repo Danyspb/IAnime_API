@@ -66,7 +66,9 @@ async function RecentAnime() {
                                     Episode: episode,
                                     Type: type,
                                 }
-                            }
+                            },
+                            upsert: true,
+
                         }
                     }])
                 }
@@ -83,6 +85,3 @@ async function RecentAnime() {
 RecentAnime();
 
 module.exports = RecentAnime;
-
-
-

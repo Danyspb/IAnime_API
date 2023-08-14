@@ -38,7 +38,7 @@ async function RecentAnime(){
                     type:type
                 })
                 SortieRecent.save();
-                console.log("donnes ajoutee");
+                
             }else{
                 const id = await RecentModel.find({AnimeId})
                 for(a of id){
@@ -66,7 +66,7 @@ async function RecentAnime(){
                             
                         }
                     ])
-                    console.log('donnes modifier avec succes ');
+                    
                 }         
             }
        }catch(err){

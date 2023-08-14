@@ -12,26 +12,63 @@ async function LesTop30Animes(){
         const donnes = await axios.get(url);
         const $ = cheerio.load(donnes.data)
 
-        $('table[width="214"] tbody').each((i,crap)=>{
-            const animeId = $(crap).find('a').attr('href').match(/(\d+)/gm).toString();
+        $('table[width="214"] tbody').each(async(i,crap)=>{
+            const AnimeId = $(crap).find('a').attr('href').match(/(\d+)/gm).toString();
             const titre = $(crap).find('span').text();
             const image = $(crap).find('div').css('background').match(/http.*(jpg|png|jpeg|webp)/gm).toString();
             const lienText = $(crap).find('a').attr('href');
             const lien = `${Domaine}${lienText}`;
             const type = $(crap).find('div img').attr('title').match(/(VF|VOSTFR)/gm).toString();
-            const result = { animeId, titre, image, lien, type }
+            const result = { AnimeId, titre, image, lien, type }
             dataAnime.push(result);
 
-            const Top30Anime = new Top30Model({
-                animeId: animeId,
-                titre: titre,
-                image: image,
-                lien: lien ,
-                type :type
 
-            })
             
-            // Top30Anime.save()
+            try{
+                const data = await Top30Model.find({});
+                    if(data.length === 0){
+                        // const Top30Anime = new Top30Model({
+                        //     AnimeId: AnimeId,
+                        //     titre: titre,
+                        //     image: image,
+                        //     lien: lien ,
+                        //     type :type
+            
+                        // })
+                        // Top30Anime.save()
+                        
+                    }else{
+                        const id = await Top30Model.find({AnimeId})
+                        for(a of id){
+                            Top30Model.bulkWrite([
+                                {
+                                    updateMany:
+                                    {
+                                        "filter":
+                                        {
+                                            "AnimeId" : a.AnimeId
+                                        },
+                                        "update":
+                                        {
+                                            $set:{
+                                                AnimeId: AnimeId,
+                                                titre: titre,
+                                                image: image,
+                                                lien: lien ,
+                                                type :type,
+                                            }
+                                        },
+                                        upsert:true
+                                    }
+                                    
+                                }
+                            ])
+                            
+                        }         
+                    }
+               }catch(err){
+                throw err
+               }
 
         });
         return dataAnime;

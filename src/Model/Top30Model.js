@@ -3,12 +3,12 @@ const mongoose = require('mongoose');
 const Top30Schema = new mongoose.Schema({
     AnimeId: {
         type : Number,
-        unique : true
+        unique: true
     },
-    titre: String,
-    image: String,
-    lien: String,
-    type: String
+    Titre: String,
+    Image: String,
+    Lien: String,
+    Type: String
 })
 
 Top30Schema.virtual('id').get(function(){

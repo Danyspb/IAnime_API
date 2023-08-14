@@ -26,29 +26,52 @@ async function RecentAnime(){
         dataAnime.push(result);
 
         //////// mettres ces donnes dans notre base de donnes////////
-        // const SortieRecent = new RecentModel({
-        //     AnimeId: AnimeId,
-        //     titre: titre,
-        //     image :image,
-        //     lien: lien,
-        //     episode:episode,
-        //     type:type
-        // })
-        // SortieRecent.save();
-        const SortieRecent = new RecentModel({
-            AnimeId: AnimeId,
-            titre: titre,
-            image :image,
-            lien: lien,
-            episode:episode,
-            type:type
-        })
-        SortieRecent.save();
-        
-        // const data = await RecentModel.find({});
-        // console.log(data);
-        
-        ///////////////////////////////////////////////
+       try{
+        const data = await RecentModel.find({});
+            if(data.length === 0){
+                const SortieRecent = new RecentModel({
+                    AnimeId: AnimeId,
+                    titre: titre,
+                    image: image,
+                    lien: lien,
+                    episode:episode,
+                    type:type
+                })
+                SortieRecent.save();
+                console.log("donnes ajoutee");
+            }else{
+                const id = await RecentModel.find({AnimeId})
+                for(a of id){
+                    RecentModel.bulkWrite([
+                        {
+                            updateMany:
+                            {
+                                "filter":
+                                {
+                                    "AnimeId" : a.AnimeId
+                                },
+                                "update":
+                                {
+                                    $set:{
+                                        AnimeId: AnimeId,
+                                        titre: titre,
+                                        image:image,
+                                        lien:lien,
+                                        episode:episode,
+                                        type:type
+                                    }
+                                },
+                                upsert:true
+                            }
+                            
+                        }
+                    ])
+                    console.log('donnes modifier avec succes ');
+                }         
+            }
+       }catch(err){
+        throw err
+       }
         
         
        });

@@ -47,30 +47,44 @@ async function RecentAnime() {
                 })
                 RecentSortie.save();
                 // console.log("Donnees sauvegare avec succes !!!")
-            } else {
-                const id = await RecentModel.find({
+            } else{
+                const SearchId = await RecentModel.find({
                     AnimeId
                 })
-                for (a of id) {
-                    RecentModel.bulkWrite([{
-                        updateMany: {
-                            "filter": {
-                                "AnimeId": a.AnimeId
-                            },
-                            "update": {
-                                $set: {
-                                    AnimeId: AnimeId,
-                                    Titre: titre,
-                                    Image: image,
-                                    Lien: lien,
-                                    Episode: episode,
-                                    Type: type,
-                                }
-                            },
-                            upsert: true,
-
+                for (a of SearchId) {
+                    RecentModel.bulkWrite([
+                        {
+                            updateMany: {
+                                "filter": {
+                                    "AnimeId":  a.AnimeId
+                                },
+                                "update": {
+                                    $set: {
+                                        Titre: titre,
+                                        Image: image,
+                                        Lien: lien,
+                                        Episode: episode,
+                                        Type: type,
+                                    }
+                                },
+                                upsert: true,
+                            }
                         }
-                    }])
+                        // {
+                        //     deleteMany: {
+
+                        //         // cette operation de comparaison marche
+                        //         // "filter" :{
+                        //         //     "AnimeId": {$eq : a.AnimeId}
+                        //         // },
+                        //         /// cette operation de comparaison ne marche pas
+                        //         // "filter":{
+                        //         //     "AnimeId": {$ne : a.AnimeId}
+                        //         // }
+                                
+                        //     }
+                        // }
+                    ])
                 }
                 // console.log("Mise a jour des donnes reussi !!!")
             }

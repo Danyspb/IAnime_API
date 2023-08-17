@@ -1,7 +1,7 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const { TopAnime, Domaine } = require('../Liens/AnimeLink');
-const { Top30Model } = require('../Model/Top30Model');
+const { TopAnime,Domaine } = require('../../Liens/AnimeLink');
+const { Top30Model } = require('../../Model/AnimesModel/Top30Model');
 
 
 const url = TopAnime;

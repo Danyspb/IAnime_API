@@ -1,8 +1,12 @@
 const express = require('express');
-const RecentAnime = require('../Extraction/AnimeRecent');
-const { RecentModel } = require('../Model/RecentModel');
-const LesTop30Animes = require('../Extraction/Top30Anime');
-const { Top30Model } = require('../Model/Top30Model');
+const RecentAnime = require('../Extraction/Animes/AnimeRecent');
+const {
+    RecentModel
+} = require('../Model/AnimesModel/RecentModel');
+const LesTop30Animes = require('../Extraction/Animes/Top30Anime');
+const {
+    Top30Model
+} = require('../Model/AnimesModel/Top30Model');
 const router = express.Router();
 
 
@@ -10,11 +14,11 @@ router.get(`/recent`, async (req, res) => {
     try {
         const data = await RecentAnime();
         const result = data.reduce((unique, o) => {
-            if(!unique.some(obj => obj.AnimeId === o.AnimeId && obj.Type === o.Type)) {
-                        unique.push(o);
-                }
-                return unique;
-            },[]);
+            if (!unique.some(obj => obj.AnimeId === o.AnimeId && obj.Type === o.Type)) {
+                unique.push(o);
+            }
+            return unique;
+        }, []);
         res.status(200).json({
             succes: true,
             result
@@ -40,15 +44,15 @@ router.get(`/recent`, async (req, res) => {
 
 
 router.get(`/top30`, async (req, res) => {
-    
+
     try {
         const data = await LesTop30Animes();
         const result = data.reduce((unique, o) => {
-            if(!unique.some(obj => obj.AnimeId === o.AnimeId && obj.Type === o.Type)) {
-                        unique.push(o);
-                }
-                return unique;
-            },[]);
+            if (!unique.some(obj => obj.AnimeId === o.AnimeId && obj.Type === o.Type)) {
+                unique.push(o);
+            }
+            return unique;
+        }, []);
 
         res.status(200).json({
             succes: true,

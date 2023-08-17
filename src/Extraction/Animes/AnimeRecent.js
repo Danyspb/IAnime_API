@@ -1,7 +1,8 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const { RecentAnimeLink, Domaine } = require('../Liens/AnimeLink');
-const { RecentModel } = require('../Model/RecentModel');
+const { RecentAnimeLink, Domaine} = require('../../Liens/AnimeLink');
+const { RecentModel } = require('../../Model/AnimesModel/RecentModel');
+
 
 
 const url = RecentAnimeLink;
@@ -47,16 +48,15 @@ async function RecentAnime() {
                 })
                 RecentSortie.save();
                 // console.log("Donnees sauvegare avec succes !!!")
-            } else{
+            } else {
                 const SearchId = await RecentModel.find({
                     AnimeId
                 })
                 for (a of SearchId) {
-                    RecentModel.bulkWrite([
-                        {
+                    RecentModel.bulkWrite([{
                             updateMany: {
                                 "filter": {
-                                    "AnimeId":  a.AnimeId
+                                    "AnimeId": a.AnimeId
                                 },
                                 "update": {
                                     $set: {
@@ -81,7 +81,7 @@ async function RecentAnime() {
                         //         // "filter":{
                         //         //     "AnimeId": {$ne : a.AnimeId}
                         //         // }
-                                
+
                         //     }
                         // }
                     ])

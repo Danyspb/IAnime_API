@@ -48,29 +48,48 @@ async function DetailsAnime() {
             episodes   
         }
         dataAnime.push(result);
-        const verif = await InfoMode.find({
-            titre
-        })
+        const verif = await InfoMode.find({})
 
         if(verif.length === 0){
             const newDetails = new InfoMode({
                 Titre: titre,
                 Coverimage :coverImage ,
                 Image: image,
+                Titreoriginal:titreOriginal,
                 Type:type,
                 Genre:genres,
                 Datesortie:dateSortie,
                 Duréepisode:dureeEpisode,
                 Studio:studio,
                 Description:description,
-                Episodes:episodes
+                Episodes: episodes
             })
             newDetails.save();
         }else{
-            
+            InfoMode.bulkWrite([{
+                    deleteMany: {
+                        "filter": {}
+                    }
+                },
+                {
+                    insertOne:{
+                        document:{
+                            Titre:titre,
+                            CoverImage :coverImage ,
+                            Image: image,
+                            TitreOriginal: titreOriginal,
+                            Type:type,
+                            Genre:genres,
+                            Datesortie:dateSortie,
+                            Duréepisode:dureeEpisode,
+                            Studio:studio,
+                            Description:description,
+                            Episodes:episodes
+                        }
+                    }
+                }
+            ])
         }
-
-
 
         return dataAnime;
     }catch (err){

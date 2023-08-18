@@ -14,10 +14,7 @@ const InfoSchema = new mongoose.Schema({
     DureeEpisode: String,
     Studio: String,
     Description: String,
-    Episodes: [{
-        Numero: String,
-        Liens: String
-    }]
+    Episodes : Array,
 })
 
 InfoSchema.virtual('id').get(function(){

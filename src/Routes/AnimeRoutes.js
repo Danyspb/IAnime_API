@@ -1,12 +1,9 @@
 const express = require('express');
 const RecentAnime = require('../Extraction/Animes/AnimeRecent');
-const {
-    RecentModel
-} = require('../Model/AnimesModel/RecentModel');
+const { RecentModel } = require('../Model/AnimesModel/RecentModel');
 const LesTop30Animes = require('../Extraction/Animes/Top30Anime');
-const {
-    Top30Model
-} = require('../Model/AnimesModel/Top30Model');
+const { Top30Model } = require('../Model/AnimesModel/Top30Model');
+const DetailsAnime = require('../Extraction/Animes/InfosAnime');
 const router = express.Router();
 
 
@@ -74,6 +71,21 @@ router.get(`/top30`, async (req, res) => {
 
     }
 })
+
+router.get(`/info`, async(req, res)=>{
+    try{
+
+        const data = await DetailsAnime();
+        res.status(200).json({
+            success :true ,
+            data
+        })
+
+    }catch{
+
+    }
+})
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////   si vous voulez recuperer les donnes qui se trouve dans votre base de donnes  utilisez le chemin ci dessous    //////////

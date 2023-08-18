@@ -1,11 +1,13 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const { AnimeInfo } = require('../../Liens/AnimeLink');
+const { InfoMode } = require('../../Model/AnimesModel/InfoModel');
 
 
 const url = AnimeInfo;
 const dataAnime = [];
 const episodes = [];
+
 async function DetailsAnime() {
 
     try{
@@ -27,10 +29,12 @@ async function DetailsAnime() {
             const  numero = $(ep).text();
             const  lien = $(ep).attr('href');
             const res = {numero, lien}
-            episodes.push(res);
+            if(res.numero.includes('Episode') || res.numero.includes('Oav ') || res.numero.includes('Special')){
+                episodes.push(res)
+            }
         })
-        const result = {
-            
+
+        const result = {  
             titre,
             coverImage,
             image,
@@ -42,17 +46,36 @@ async function DetailsAnime() {
             studio,
             description,
             episodes   
-            
         }
         dataAnime.push(result);
+        const verif = await InfoMode.find({
+            titre
+        })
+
+        if(verif.length === 0){
+            const newDetails = new InfoMode({
+                Titre: titre,
+                Coverimage :coverImage ,
+                Image: image,
+                Type:type,
+                Genre:genres,
+                Datesortie:dateSortie,
+                Duréepisode:dureeEpisode,
+                Studio:studio,
+                Description:description,
+                Episodes:episodes
+            })
+            newDetails.save();
+        }else{
+            
+        }
+
+
+
         return dataAnime;
-        
-
-
-    }catch{
-        console.log('helllo')
+    }catch (err){
+        throw err
     }
-
 
 }
 

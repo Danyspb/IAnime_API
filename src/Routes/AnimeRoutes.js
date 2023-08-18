@@ -74,14 +74,33 @@ router.get(`/top30`, async (req, res) => {
 
 router.get(`/info`, async(req, res)=>{
     try{
-
+        
         const data = await DetailsAnime();
+        const result = data.reduce((unique, o) => {
+            if (!unique.some(obj => obj.titre === o.titre)) {
+                unique.push(o);
+            }
+            return unique;
+        }, []);
         res.status(200).json({
             success :true ,
-            data
+            result
         })
 
     }catch{
+        
+        if (res.status(404)) {
+            return res.json({
+                succes: false,
+                message: 'erreur aucun fichier trouver '
+            })
+        }
+        if (res.status(500)) {
+            return res.status(500).json({
+                succes: false,
+                message: ' Erreur Arrete de faire de la merde !!!'
+            })
+        }
 
     }
 })

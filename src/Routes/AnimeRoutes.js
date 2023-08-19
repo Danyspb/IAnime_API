@@ -7,7 +7,8 @@ const DetailsAnime = require('../Extraction/Animes/InfosAnime');
 const router = express.Router();
 
 
-router.get(`/recent`, async (req, res) => {
+router.get(`/api/recent`, async (req, res) => {
+    
     try {
         const data = await RecentAnime();
         const result = data.reduce((unique, o) => {
@@ -40,7 +41,7 @@ router.get(`/recent`, async (req, res) => {
 
 
 
-router.get(`/top30`, async (req, res) => {
+router.get(`/api/top30`, async (req, res) => {
 
     try {
         const data = await LesTop30Animes();
@@ -72,23 +73,25 @@ router.get(`/top30`, async (req, res) => {
     }
 })
 
-router.get(`/info`, async(req, res)=>{
+router.get(`/api/info/:id`, async(req, res)=>{
+
     try{
-        
-        const data = await DetailsAnime();
+        const id = req.params.id;
+        const data = await DetailsAnime(id);
         const result = data.reduce((unique, o) => {
             if (!unique.some(obj => obj.titre === o.titre)) {
                 unique.push(o);
             }
             return unique;
         }, []);
+
         res.status(200).json({
             success :true ,
             result
         })
 
     }catch{
-        
+        console.log(res);
         if (res.status(404)) {
             return res.json({
                 succes: false,
@@ -110,7 +113,7 @@ router.get(`/info`, async(req, res)=>{
 //////////////   si vous voulez recuperer les donnes qui se trouve dans votre base de donnes  utilisez le chemin ci dessous    //////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-router.get(`/dbRecent`, async (req, res) => {
+router.get(`/api/dbRecent`, async (req, res) => {
     let recentAniDB = await RecentModel.find();
     if (!recentAniDB) {
         if (res.status(500)) {
@@ -131,7 +134,7 @@ router.get(`/dbRecent`, async (req, res) => {
 
 })
 
-router.get(`/dbTop30`, async (req, res) => {
+router.get(`/api/dbTop30`, async (req, res) => {
     let top30 = await Top30Model.find();
     if (!top30) {
         if (res.status(500)) {

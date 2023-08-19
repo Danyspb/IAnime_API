@@ -7,17 +7,16 @@ const { InfoMode } = require('../../Model/AnimesModel/InfoModel');
 const url = AnimeInfo;
 const dataAnime = [];
 const episodes = [];
+async function DetailsAnime(id){
 
-async function DetailsAnime() {
-
-    try{
-        const donnes = await axios.get(url);
+    try {
+        const donnes = await axios.get(`${url +id}AduyTyjEsVSmFeRT`);
         const $ = cheerio.load(donnes.data)
 
-        
+
         const titre = $('center h1 ').text();
         const coverImage = $('center div ').css('background').match(/http.*(jpg|png|jpeg|webp)/gm).toString();
-        const image =  $('td img').attr('src');
+        const image = $('td img').attr('src');
         const titreOriginal = $('td font:contains("Titre original")').next().text();
         const type = $('td font:contains("Format")').next().text();
         const genres = $('td font:contains("Genre")').next().text();
@@ -25,16 +24,19 @@ async function DetailsAnime() {
         const dureeEpisode = $('td font:contains("Durée par épisode")').next().text();
         const studio = $('td font:contains("Studio")').next().text();
         const description = $('legend').eq(1).next().text();
-        $('.cat_post_item-1.clearfix a').each((i, ep)=>{
-            const  numero = $(ep).text();
-            const  lien = $(ep).attr('href');
-            const res = {numero, lien}
-            if(res.numero.includes('Episode') || res.numero.includes('Oav ') || res.numero.includes('Special')){
+        $('.cat_post_item-1.clearfix a').each((i, ep) => {
+            const numero = $(ep).text();
+            const lien = $(ep).attr('href');
+            const res = {
+                numero,
+                lien
+            }
+            if (res.numero.includes('Episode') || res.numero.includes('Oav ') || res.numero.includes('Special')) {
                 episodes.push(res)
             }
         })
 
-        const result = {  
+        const result = {
             titre,
             coverImage,
             image,
@@ -45,46 +47,46 @@ async function DetailsAnime() {
             dureeEpisode,
             studio,
             description,
-            episodes   
+            episodes
         }
         dataAnime.push(result);
         const verif = await InfoMode.find({})
 
-        if(verif.length === 0){
+        if (verif.length === 0) {
             const newDetails = new InfoMode({
                 Titre: titre,
-                Coverimage :coverImage ,
+                CoverImage: coverImage,
                 Image: image,
-                Titreoriginal:titreOriginal,
-                Type:type,
-                Genre:genres,
-                Datesortie:dateSortie,
-                Duréepisode:dureeEpisode,
-                Studio:studio,
-                Description:description,
+                Titreoriginal: titreOriginal,
+                Type: type,
+                Genre: genres,
+                Datesortie: dateSortie,
+                Duréepisode: dureeEpisode,
+                Studio: studio,
+                Description: description,
                 Episodes: episodes
             })
             newDetails.save();
-        }else{
+        } else {
             InfoMode.bulkWrite([{
                     deleteMany: {
                         "filter": {}
                     }
                 },
                 {
-                    insertOne:{
-                        document:{
-                            Titre:titre,
-                            CoverImage :coverImage ,
+                    insertOne: {
+                        "document": {
+                            Titre: titre,
+                            CoverImage: coverImage,
                             Image: image,
                             TitreOriginal: titreOriginal,
-                            Type:type,
-                            Genre:genres,
-                            Datesortie:dateSortie,
-                            Duréepisode:dureeEpisode,
-                            Studio:studio,
-                            Description:description,
-                            Episodes:episodes
+                            Type: type,
+                            Genre: genres,
+                            Datesortie: dateSortie,
+                            Duréepisode: dureeEpisode,
+                            Studio: studio,
+                            Description: description,
+                            Episodes: episodes
                         }
                     }
                 }
@@ -92,12 +94,12 @@ async function DetailsAnime() {
         }
 
         return dataAnime;
-    }catch (err){
+    } catch (err) {
         throw err
     }
 
 }
 
-DetailsAnime();
+
 
 module.exports = DetailsAnime;

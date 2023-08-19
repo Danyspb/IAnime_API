@@ -4,6 +4,7 @@ const { RecentModel } = require('../Model/AnimesModel/RecentModel');
 const LesTop30Animes = require('../Extraction/Animes/Top30Anime');
 const { Top30Model } = require('../Model/AnimesModel/Top30Model');
 const DetailsAnime = require('../Extraction/Animes/InfosAnime');
+const { InfoMode } = require('../Model/AnimesModel/InfoModel');
 const router = express.Router();
 
 
@@ -78,16 +79,16 @@ router.get(`/api/info/:id`, async(req, res)=>{
     try{
         const id = req.params.id;
         const data = await DetailsAnime(id);
-        const result = data.reduce((unique, o) => {
-            if (!unique.some(obj => obj.titre === o.titre)) {
-                unique.push(o);
-            }
-            return unique;
-        }, []);
+        // const result = data.reduce((unique, o) => {
+        //     if (!unique.some(obj => obj.titre === o.titre)) {
+        //         unique.push(o);
+        //     }
+        //     return unique;
+        // }, []);
 
         res.status(200).json({
             success :true ,
-            result
+            data
         })
 
     }catch{
@@ -154,5 +155,27 @@ router.get(`/api/dbTop30`, async (req, res) => {
     }
 
 })
+
+
+router.get(`/api/dbInfo`, async(req, res)=>{
+    let infoAnime = await InfoMode.find()
+    if(!infoAnime){
+        if(res.status(404)){
+            return res.status(404).json({
+                succes: false,
+                message: 'Erreur Fichier non trouvee'
+            })
+        }
+        if(res.status(500)){
+            return res.status(500).json({
+                succes: false,
+                message: 'Erreur Arrete de faire de la merde !!!'
+            })
+        }
+    }else{
+        return res.status(200).json(infoAnime)
+    }
+})
+
 
 module.exports = router;

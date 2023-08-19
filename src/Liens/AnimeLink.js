@@ -8,8 +8,6 @@ const TopAnime = 'https://www.ianimes.org/top_30.php';
 const AnimeInfo = `https://www.ianimes.org/liste.php?manga=BbkCdhihfKnKBPQM`;
 
 
-//////////////////// le lien pour ma base de donnes ////////////////////////
-
 
 module.exports = {
     RecentAnimeLink,

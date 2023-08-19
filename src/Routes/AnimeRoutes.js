@@ -79,16 +79,10 @@ router.get(`/api/info/:id`, async(req, res)=>{
     try{
         const id = req.params.id;
         const data = await DetailsAnime(id);
-        // const result = data.reduce((unique, o) => {
-        //     if (!unique.some(obj => obj.titre === o.titre)) {
-        //         unique.push(o);
-        //     }
-        //     return unique;
-        // }, []);
-
+        const result = data.shift();
         res.status(200).json({
             success :true ,
-            data
+            result
         })
 
     }catch{

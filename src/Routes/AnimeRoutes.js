@@ -8,7 +8,7 @@ const { InfoMode } = require('../Model/AnimesModel/InfoModel');
 const router = express.Router();
 
 
-router.get(`/api/recent`, async (req, res) => {
+router.get(`/anime/recent`, async (req, res) => {
     
     try {
         const data = await RecentAnime();
@@ -42,7 +42,7 @@ router.get(`/api/recent`, async (req, res) => {
 
 
 
-router.get(`/api/top30`, async (req, res) => {
+router.get(`/anime/top30`, async (req, res) => {
 
     try {
         const data = await LesTop30Animes();
@@ -74,7 +74,7 @@ router.get(`/api/top30`, async (req, res) => {
     }
 })
 
-router.get(`/api/info/:id`, async(req, res)=>{
+router.get(`/anime/info/:id`, async(req, res)=>{
 
     try{
         const id = req.params.id;
@@ -108,7 +108,7 @@ router.get(`/api/info/:id`, async(req, res)=>{
 //////////////   si vous voulez recuperer les donnes qui se trouve dans votre base de donnes  utilisez le chemin ci dessous    //////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-router.get(`/api/dbRecent`, async (req, res) => {
+router.get(`/anime/dbRecent`, async (req, res) => {
     let recentAniDB = await RecentModel.find();
     if (!recentAniDB) {
         if (res.status(500)) {
@@ -129,7 +129,7 @@ router.get(`/api/dbRecent`, async (req, res) => {
 
 })
 
-router.get(`/api/dbTop30`, async (req, res) => {
+router.get(`/anime/dbTop30`, async (req, res) => {
     let top30 = await Top30Model.find();
     if (!top30) {
         if (res.status(500)) {
@@ -151,7 +151,7 @@ router.get(`/api/dbTop30`, async (req, res) => {
 })
 
 
-router.get(`/api/dbInfo`, async(req, res)=>{
+router.get(`/anime/dbInfo`, async(req, res)=>{
     let infoAnime = await InfoMode.find()
     if(!infoAnime){
         if(res.status(404)){

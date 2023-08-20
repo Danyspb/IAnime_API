@@ -8,7 +8,8 @@ const mongose = require('mongoose');
 
 ////////////////////////
 app.use(cors());
-app.options('*', cors())
+app.options('*',cors())
+
 ///////////////////////
 
 const anime = require('./src/Routes/AnimeRoutes');

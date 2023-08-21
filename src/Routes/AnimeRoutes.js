@@ -76,10 +76,12 @@ router.get(`/api/top30`, async (req, res) => {
 })
 
 
-router.get(`/api/AnimeByPage`, async(req, res)=>{
+router.get(`/api/AnimeByPage/:id`, async(req, res)=>{
 
     try{
-        const data = await AnimeByAlpha();
+        const id = req.params.id;
+        const data = await AnimeByAlpha(id);
+        console.log(data.length)
         const result = data.reduce((unique, o) => {
             if (!unique.some(obj => obj.AnimeId === o.AnimeId && obj.Type === o.Type)) {
                 unique.push(o);

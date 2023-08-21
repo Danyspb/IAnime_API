@@ -1,16 +1,17 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const { AnimeInfo } = require('../../Liens/AnimeLink');
 const { InfoMode } = require('../../Model/AnimesModel/InfoModel');
+const { DAnimeInfo, EAnimeInfo } = require('../../Liens/AnimeLink');
 
 
-const url = AnimeInfo;
+
 const dataAnime = [];
 const episodes = [];
-async function DetailsAnime(id){
+async function DetailsAnime(id) {
+
 
     try {
-        const donnes = await axios.get(`${url +id}AduyTyjEsVSmFeRT`);
+        const donnes = await axios.get(`${DAnimeInfo +id +EAnimeInfo}`);
         const $ = cheerio.load(donnes.data)
 
 

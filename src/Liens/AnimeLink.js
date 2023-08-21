@@ -5,12 +5,18 @@
 const RecentAnimeLink = 'https://www.ianimes.org/index.php';
 const Domaine = 'https://www.ianimes.org/';
 const TopAnime = 'https://www.ianimes.org/top_30.php';
-const AnimeInfo = `https://www.ianimes.org/liste.php?manga=BbkCdhihfKnKBPQM`;
+//////////////// le lien pour les infos des Animes //////////
+const DAnimeInfo = `https://www.ianimes.org/liste.php?manga=BbkCdhihfKnKBPQM`;
+const EAnimeInfo = `AduyTyjEsVSmFeRT`;
+/////////////////////////////////////////////////////////////////////////////
+const DLinks = `https://www.ianimes.org/listing.php?affichage=`;
+const ELinks = `&b1u3vv0lSorJk9Lex0tbKZEtbz8RlMC9`;
+//////////////////////////////////////////////////////////////
 
                      //////////////////// liste  des animes par ordre alphabetic ////////////////
 
 let page = [{
-        Caractere: '#',
+        Caractere: '1',
         value: 'Xdf789POGg45rrty'
     },
     {
@@ -117,10 +123,11 @@ let page = [{
         Caractere: 'Z',
         value: 'QQo447FFtxvxw7987'
     },
+];
 
-]
 
-const link = `https://www.ianimes.org/listing.php?affichage=${page}`
+
+
 
               ///////////////////////  liste des animes par genres  ////////////////////////////
 
@@ -130,7 +137,9 @@ module.exports = {
     RecentAnimeLink,
     Domaine,
     TopAnime,
-    AnimeInfo,
+    DAnimeInfo,
+    EAnimeInfo,
     page,
-    link
+    DLinks,
+    ELinks
 }

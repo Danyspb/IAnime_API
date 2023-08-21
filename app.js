@@ -26,7 +26,7 @@ app.use(`/`,anime );
 
 
 /////////////////////  mettre votre donnes dans une base de donnes du cluster mais il duplicate les donnes ////////////////// /////
-//////// mongose.connect('mongodb+srv://danyspb4ever:4ExpbNbI5gRn5y6z@ianimecluster.1ev9i6f.mongodb.net/?retryWrites=true&w=majority')///
+// mongose.connect('mongodb+srv://danyspb4ever:4ExpbNbI5gRn5y6z@ianimecluster.1ev9i6f.mongodb.net/?retryWrites=true&w=majority')
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 

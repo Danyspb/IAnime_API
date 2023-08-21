@@ -5,6 +5,7 @@ const LesTop30Animes = require('../Extraction/Animes/Top30Anime');
 const { Top30Model } = require('../Model/AnimesModel/Top30Model');
 const DetailsAnime = require('../Extraction/Animes/InfosAnime');
 const { InfoMode } = require('../Model/AnimesModel/InfoModel');
+const AnimeByAlpha = require('../Extraction/Animes/AnimeByPage');
 const router = express.Router();
 
 
@@ -72,6 +73,41 @@ router.get(`/api/top30`, async (req, res) => {
         }
 
     }
+})
+
+
+router.get(`/api/AnimeByPage`, async(req, res)=>{
+
+    try{
+        const data = await AnimeByAlpha();
+        const result = data.reduce((unique, o) => {
+            if (!unique.some(obj => obj.AnimeId === o.AnimeId && obj.Type === o.Type)) {
+                unique.push(o);
+            }
+            return unique;
+        }, []);
+
+        res.status(200).json({
+            succes: true,
+            result
+        })
+        
+    }catch(err){
+        if (res.status(404)) {
+            return res.json({
+                succes: false,
+                message: 'erreur aucun fichier trouver '
+            })
+        }
+        if (res.status(500)) {
+            return res.status(500).json({
+                succes: false,
+                message: ' Erreur Arrete de faire de la merde !!!'
+            })
+        }
+
+    }
+
 })
 
 router.get(`/api/info/:id`, async(req, res)=>{

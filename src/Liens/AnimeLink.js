@@ -9,38 +9,118 @@ const AnimeInfo = `https://www.ianimes.org/liste.php?manga=BbkCdhihfKnKBPQM`;
 
                      //////////////////// liste  des animes par ordre alphabetic ////////////////
 
-const page = [{
-    debA: 'Xdf789POGg45rrty',
-    A: 'Qxc108FGkpodhjccjv',
-    B: 'BoR851UkN56456uui',
-    C: 'ADs480FvP01121j',
-    D: 'Wup331BgFuytt788o',
-    E: 'Vja882Gptlklgjjk',
-    F: 'CbO016Dxmipoifdg5456',
-    G: 'Jpr104Gol654rtetfgh',
-    H: 'Bss541Lky987ljhlgh2313s',
-    I: 'FtH029Lgtjkhnbspoipfg',
-    J: 'Mer710Gnr132654987',
-    K: 'Qop487Rdtkmlkfgh5646aze',
-    L: 'Bod452VViiuher8787fd',
-    M: 'Wqs418Rtbsdfg7987ds',
-    N: 'SpS891Ntpztzret87ty',
-    O: 'Xod038Fbzfghfdh87df',
-    P: 'ApG097Bgtzrte787dfg',
-    Q: 'Pvi726Butcvbqs45re',
-    R: 'Foo00451xcv45fdtyr',
-    S: 'Kpy369Mbvzzret7987',
-    T: 'PdR780Bop78ret89z7g',
-    U: 'Mvp442Srifdsg7987sdg',
-    V: 'Nrs598Ftp87rfdxgxd8',
-    W: 'Cof591Fopoiup87uipou',
-    X: 'Jsa419Ygpazer878fdsd',
-    Y: 'Rij126Prtezrt5454sdfg',
-    Z: 'QQo447FFtxvxw7987',
+let page = [{
+        Caractere: '#',
+        value: 'Xdf789POGg45rrty'
+    },
+    {
+        Caractere: 'A',
+        value: 'Qxc108FGkpodhjccjv'
+    },
+    {
+        Caractere: 'B',
+        value: 'BoR851UkN56456uui'
+    },
+    {
+        Caractere: 'C',
+        value: 'ADs480FvP01121j'
+    },
+    {
+        Caractere: 'D',
+        value: 'Wup331BgFuytt788o'
+    },
+    {
+        Caractere: 'E',
+        value: 'Vja882Gptlklgjjk'
+    },
+    {
+        Caractere: 'F',
+        value: 'CbO016Dxmipoifdg5456'
+    },
+    {
+        Caractere: 'G',
+        value: 'Jpr104Gol654rtetfgh'
+    },
+    {
+        Caractere: 'H',
+        value: 'Bss541Lky987ljhlgh2313s'
+    },
+    {
+        Caractere: 'I',
+        value: 'FtH029Lgtjkhnbspoipfg'
+    },
+    {
+        Caractere: 'J',
+        value: 'Mer710Gnr132654987'
+    },
+    {
+        Caractere: 'K',
+        value: 'Qop487Rdtkmlkfgh5646aze'
+    },
+    {
+        Caractere: 'L',
+        value: 'Bod452VViiuher8787fd'
+    },
+    {
+        Caractere: 'M',
+        value: 'Wqs418Rtbsdfg7987ds'
+    },
+    {
+        Caractere: 'N',
+        value: 'SpS891Ntpztzret87ty'
+    },
+    {
+        Caractere: 'O',
+        value: 'Xod038Fbzfghfdh87df'
+    },
+    {
+        Caractere: 'P',
+        value: 'ApG097Bgtzrte787dfg'
+    },
+    {
+        Caractere: 'Q',
+        value: 'Pvi726Butcvbqs45re'
+    },
+    {
+        Caractere: 'R',
+        value: 'Foo00451xcv45fdtyr'
+    },
+    {
+        Caractere: 'S',
+        value: 'Kpy369Mbvzzret7987'
+    },
+    {
+        Caractere: 'T',
+        value: 'PdR780Bop78ret89z7g'
+    },
+    {
+        Caractere: 'U',
+        value: 'Mvp442Srifdsg7987sdg'
+    },
+    {
+        Caractere: 'V',
+        value: 'Nrs598Ftp87rfdxgxd8'
+    },
+    {
+        Caractere: 'W',
+        value: 'Cof591Fopoiup87uipou'
+    },
+    {
+        Caractere: 'X',
+        value: 'Jsa419Ygpazer878fdsd'
+    },
+    {
+        Caractere: 'Y',
+        value: 'Rij126Prtezrt5454sdfg'
+    },
+    {
+        Caractere: 'Z',
+        value: 'QQo447FFtxvxw7987'
+    },
 
-}]
+]
 
-// const link = `https://www.ianimes.org/listing.php?affichage=${A}&b1u3vv0lSorJk9Lex0tbKZEtbz8RlMC9`
+const link = `https://www.ianimes.org/listing.php?affichage=${page}`
 
               ///////////////////////  liste des animes par genres  ////////////////////////////
 
@@ -52,4 +132,5 @@ module.exports = {
     TopAnime,
     AnimeInfo,
     page,
+    link
 }

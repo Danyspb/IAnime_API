@@ -1,15 +1,25 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
+const { link } = require('../../Routes/AnimeRoutes');
+const { page } = require('../../Liens/AnimeLink');
 
 
-
-const url = 'https://www.ianimes.org/listing.php?affichage=Qxc108FGkpodhjccjv&b1u3vv0lSorJk9Lex0tbKZEtbz8RlMC9';
+// https://www.ianimes.org/listing.php?affichage=${A}&b1u3vv0lSorJk9Lex0tbKZEtbz8RlMC9
+const url = link;
 const dataAnime = [];
+
+
+
+
 
 async function AnimeByAlpha() {
 
+    console.log(page.length)
+    
+
+    
     try{
-       const donnes = await axios.get(url)
+       const donnes = await axios.get('https://www.ianimes.org/listing.php?affichage=Wup331BgFuytt788o&b1u3vv0lSorJk9Lex0tbKZEtbz8RlMC9')
        const $ = cheerio.load(donnes.data)
 
        $('table[width="95%"] center table[width="214"] tbody').each((i, rek)=>{

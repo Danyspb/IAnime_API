@@ -6,9 +6,8 @@ const { RecentModel } = require('../../Model/AnimesModel/RecentModel');
 
 
 const url = RecentAnimeLink;
-const dataAnime = [];
 
-async function RecentAnime() {
+async function RecentAnime(dataAnime = []) {
 
     try {
         const donnes = await axios.get(url);
@@ -23,15 +22,14 @@ async function RecentAnime() {
             const episode = $(inf).find('font[color="#FF4500"]').text();
             const type = $(inf).find('font[color="#008080"]').eq(1).text();
 
-            const result = {
+            dataAnime.push({
                 AnimeId,
                 titre,
                 image,
                 lien,
                 episode,
                 type
-            }
-            dataAnime.push(result);
+            });
 
             const info = await RecentModel.find({
                 AnimeId

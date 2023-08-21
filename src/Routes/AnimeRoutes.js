@@ -13,15 +13,9 @@ router.get(`/api/recent`, async (req, res) => {
     
     try {
         const data = await RecentAnime();
-        const result = data.reduce((unique, o) => {
-            if (!unique.some(obj => obj.AnimeId === o.AnimeId && obj.Type === o.Type)) {
-                unique.push(o);
-            }
-            return unique;
-        }, []);
         res.status(200).json({
             succes: true,
-            result
+            data
         })
     } catch {
         if (res.status(404)) {
@@ -47,16 +41,9 @@ router.get(`/api/top30`, async (req, res) => {
 
     try {
         const data = await LesTop30Animes();
-        const result = data.reduce((unique, o) => {
-            if (!unique.some(obj => obj.AnimeId === o.AnimeId && obj.Type === o.Type)) {
-                unique.push(o);
-            }
-            return unique;
-        }, []);
-
         res.status(200).json({
             succes: true,
-            result
+            data
         })
     } catch {
         if (res.status(404)) {
@@ -81,17 +68,9 @@ router.get(`/api/AnimeByPage/:id`, async(req, res)=>{
     try{
         const id = req.params.id;
         const data = await AnimeByAlpha(id);
-        console.log(data.length)
-        const result = data.reduce((unique, o) => {
-            if (!unique.some(obj => obj.AnimeId === o.AnimeId && obj.Type === o.Type)) {
-                unique.push(o);
-            }
-            return unique;
-        }, []);
-
         res.status(200).json({
             succes: true,
-            result
+            data
         })
         
     }catch(err){
@@ -117,10 +96,9 @@ router.get(`/api/info/:id`, async(req, res)=>{
     try{
         const id = req.params.id;
         const data = await DetailsAnime(id);
-        const result = data.shift();
         res.status(200).json({
             success :true ,
-            result
+            data
         })
 
     }catch{

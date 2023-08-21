@@ -5,9 +5,7 @@ const { DAnimeInfo, EAnimeInfo } = require('../../Liens/AnimeLink');
 
 
 
-const dataAnime = [];
-const episodes = [];
-async function DetailsAnime(id) {
+async function DetailsAnime(id, dataAnime = [], episodes = [] ) {
 
 
     try {
@@ -36,8 +34,7 @@ async function DetailsAnime(id) {
                 episodes.push(res)
             }
         })
-
-        const result = {
+        dataAnime.push({
             titre,
             coverImage,
             image,
@@ -49,8 +46,7 @@ async function DetailsAnime(id) {
             studio,
             description,
             episodes
-        }
-        dataAnime.push(result);
+        });
         const verif = await InfoMode.find({})
 
         if (verif.length === 0) {

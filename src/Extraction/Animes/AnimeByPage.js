@@ -3,15 +3,12 @@ const cheerio = require('cheerio');
 const { page, DLinks, ELinks  } = require('../../Liens/AnimeLink');
 
 
-const dataAnime = [];
 
-
-async function AnimeByAlpha(id) {
+async function AnimeByAlpha(id, dataAnime = []) {
 
     for(i of page){
         if(id === i.Caractere){
             id = i.value;
-            console.log();
             try{
         
                 const donnes = await axios.get(`${DLinks + id + ELinks}`)
@@ -25,16 +22,14 @@ async function AnimeByAlpha(id) {
                  const episode = $(rek).find('td[width="40%"] font[color="#FF4500"]').text();
                  const type = $(rek).find('td[width="25%"] font[color="#008080"]').text();
          
-                 const result ={
-                     AnimeId,
-                     titre,
-                     image,
-                     lien,
-                     episode,
-                     type
-                 }
-         
-                 dataAnime.push(result)
+                 dataAnime.push({
+                    AnimeId,
+                    titre,
+                    image,
+                    lien,
+                    episode,
+                    type
+                })
                          
                  })
                  return dataAnime;

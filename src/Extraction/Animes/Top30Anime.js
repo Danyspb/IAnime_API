@@ -5,9 +5,9 @@ const { Top30Model } = require('../../Model/AnimesModel/Top30Model');
 
 
 const url = TopAnime;
-const dataAnime = [];
 
-async function LesTop30Animes() {
+
+async function LesTop30Animes(dataAnime = []) {
     try {
         const donnes = await axios.get(url);
         const $ = cheerio.load(donnes.data)
@@ -19,14 +19,14 @@ async function LesTop30Animes() {
             const lienText = $(crap).find('a').attr('href');
             const lien = `${Domaine}${lienText}`;
             const type = $(crap).find('div img').attr('title').match(/(VF|VOSTFR)/gm).toString();
-            const result = {
+
+            dataAnime.push({
                 AnimeId,
                 titre,
                 image,
                 lien,
                 type
-            }
-            dataAnime.push(result)
+            })
             const info = await Top30Model.find({
                 AnimeId
             });

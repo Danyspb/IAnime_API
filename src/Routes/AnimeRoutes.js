@@ -6,6 +6,7 @@ const { Top30Model } = require('../Model/AnimesModel/Top30Model');
 const DetailsAnime = require('../Extraction/Animes/InfosAnime');
 const { InfoMode } = require('../Model/AnimesModel/InfoModel');
 const AnimeByAlpha = require('../Extraction/Animes/AnimeByPage');
+const Search = require('../Extraction/Animes/SearchAnime');
 const router = express.Router();
 
 
@@ -63,7 +64,7 @@ router.get(`/api/top30`, async (req, res) => {
 })
 
 
-router.get(`/api/AnimeByPage/:id`, async(req, res)=>{
+router.get(`/api/animeByPage/:id`, async(req, res)=>{
 
     try{
         const id = req.params.id;
@@ -96,6 +97,34 @@ router.get(`/api/info/:id`, async(req, res)=>{
     try{
         const id = req.params.id;
         const data = await DetailsAnime(id);
+        res.status(200).json({
+            success :true ,
+            data
+        })
+
+    }catch{
+        console.log(res);
+        if (res.status(404)) {
+            return res.json({
+                succes: false,
+                message: 'erreur aucun fichier trouver '
+            })
+        }
+        if (res.status(500)) {
+            return res.status(500).json({
+                succes: false,
+                message: ' Erreur Arrete de faire de la merde !!!'
+            })
+        }
+
+    }
+})
+
+router.get(`/api/search/:text`, async(req,res)=>{
+
+    try{
+        const text = req.params.text;
+        const data = await Search(text);
         res.status(200).json({
             success :true ,
             data

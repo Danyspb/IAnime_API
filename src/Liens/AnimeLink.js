@@ -13,7 +13,7 @@ const DLinks = `https://www.ianimes.org/listing.php?affichage=`;
 const ELinks = `&b1u3vv0lSorJk9Lex0tbKZEtbz8RlMC9`;
 //////////////////////// le lien de la page de recherche /////////////////////////////
 const Dsearchlink = `https://www.ianimes.org/resultat+`;
-const Esearchlink = `RECHERCHER.html`;
+const Esearchlink = `.html`;
 
 
 
@@ -145,5 +145,7 @@ module.exports = {
     EAnimeInfo,
     page,
     DLinks,
-    ELinks
+    ELinks,
+    Dsearchlink,
+    Esearchlink
 }

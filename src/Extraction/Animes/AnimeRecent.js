@@ -5,12 +5,10 @@ const { RecentModel } = require('../../Model/AnimesModel/RecentModel');
 
 
 
-const url = RecentAnimeLink;
-
 async function RecentAnime(dataAnime = []) {
 
     try {
-        const donnes = await axios.get(url);
+        const donnes = await axios.get(RecentAnimeLink);
         const $ = cheerio.load(donnes.data)
 
         $('center td[align="center"]').each(async (i, inf) => {

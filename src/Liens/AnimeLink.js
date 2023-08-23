@@ -1,5 +1,4 @@
 
-
                      ///////////////// les liens pour les animes du site //////////////////////////
 
 const RecentAnimeLink = 'https://www.ianimes.org/index.php';

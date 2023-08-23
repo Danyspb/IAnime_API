@@ -5,15 +5,14 @@ const { AnimeByPM } = require('../../Model/AnimesModel/AnimeByPageModel');
 
 
 
-async function AnimeByAlpha(id, dataAnime = []) {
+async function AnimeByAlpha(carac, dataAnime = []) {
 
     for(i of page){
-        const mod = id?.toUpperCase();
+        const mod = carac?.toUpperCase();
         if(mod === i.Caractere){
-            id = i.value;
+            carac = i.value;
             try{
-        
-                const donnes = await axios.get(`${DLinks + id + ELinks}`)
+                const donnes = await axios.get(`${DLinks + carac + ELinks}`)
                 const $ = cheerio.load(donnes.data)
          
                 $('table[width="95%"] center table[width="214"] tbody').each(async (i, rek)=>{

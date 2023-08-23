@@ -1,15 +1,14 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const { TopAnime,Domaine } = require('../../Liens/AnimeLink');
+const { Domaine, TopAnime } = require('../../Liens/AnimeLink');
 const { Top30Model } = require('../../Model/AnimesModel/Top30Model');
 
 
-const url = TopAnime;
 
 
 async function LesTop30Animes(dataAnime = []) {
     try {
-        const donnes = await axios.get(url);
+        const donnes = await axios.get(TopAnime);
         const $ = cheerio.load(donnes.data)
 
         $('table[width="214"] tbody').each(async (i, crap) => {

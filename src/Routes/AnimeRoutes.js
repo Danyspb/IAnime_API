@@ -62,11 +62,11 @@ router.get(`/api/top30`, async (req, res) => {
 })
 
 
-router.get(`/api/animeByPage/:id`, async(req, res)=>{
+router.get(`/api/animeByPage/:carac`, async(req, res)=>{
 
     try{
-        const id = req.params.id;
-        const data = await AnimeByAlpha(id);
+        const carac = req.params.carac;
+        const data = await AnimeByAlpha(carac);
         res.status(200).json({
             succes: true,
             data

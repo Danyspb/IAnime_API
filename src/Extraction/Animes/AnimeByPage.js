@@ -101,9 +101,6 @@ async function AnimeByAlpha(id, dataAnime = []) {
         }
        
     }
-
-    
-    
     
 
 }

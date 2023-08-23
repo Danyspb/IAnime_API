@@ -7,7 +7,6 @@ const { DAnimeInfo, EAnimeInfo } = require('../../Liens/AnimeLink');
 
 async function DetailsAnime(id, dataAnime = [], episodes = [] ) {
 
-
     try {
         const donnes = await axios.get(`${DAnimeInfo +id +EAnimeInfo}`);
         const $ = cheerio.load(donnes.data)

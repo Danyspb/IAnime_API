@@ -18,8 +18,7 @@ const anime = require('./src/Routes/AnimeRoutes');
 app.use(express.json());
 app.use(morgan('tiny'));
 
-
-///////////////////
+//////////////////////
 
 app.use(`/`,anime );
 
@@ -47,7 +46,6 @@ mongose.connect('mongodb://127.0.0.1:27017/Ianime')
 app.get('/', (req, res)=>{
     res.send("Welcome to my IAnime API")
 })
-
 
 
 

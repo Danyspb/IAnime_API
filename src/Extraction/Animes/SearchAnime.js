@@ -1,6 +1,7 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const { Domaine, Dsearchlink, Esearchlink } = require('../../Liens/AnimeLink');
+const { SearchModel } = require('../../Model/AnimesModel/SearchAnimeModel');
 
 
 async function Search(text ,dataAnime = []){
@@ -9,7 +10,7 @@ async function Search(text ,dataAnime = []){
         const donnes = await axios.get(`${Dsearchlink + text + Esearchlink}`);
         const $ = cheerio.load(donnes.data)
 
-        $('td[align="center"] table tbody').each((i, rech)=>{
+        $('td[align="center"] table tbody').each(async (i, rech)=>{
             const textlink = $(rech).find('tr center a').text();
             if(textlink.includes('Visionner L\'anime')){
                 const AnimeId = $(rech).find('tr center a').attr('href').match(/(\d+)/gm).toString();
@@ -26,6 +27,46 @@ async function Search(text ,dataAnime = []){
                     lien,
                     type
                 })
+
+                const info = await SearchModel.find({
+                    AnimeId
+                });
+    
+                if (info.length === 0) {
+                    const rechAnime = new SearchModel({
+                        AnimeId: AnimeId,
+                        Titre: titre,
+                        Image: image,
+                        Lien: lien,
+                        Type: type
+                    });
+                    rechAnime.save();
+                    // console.log("Donnees sauvegare avec succes !!!")
+                } else {
+                    const id = await SearchModel.find({
+                        AnimeId
+                    })
+                    for (a of id) {
+                        SearchModel.bulkWrite([{
+                            updateMany: {
+                                "filter": {
+                                    "AnimeId": a.AnimeId
+                                },
+                                "update": {
+                                    $set: {
+                                        AnimeId: AnimeId,
+                                        Titre: titre,
+                                        Image: image,
+                                        Lien: lien,
+                                        Type: type,
+                                    }
+                                },
+                                upsert: true,
+                            }
+                        }])
+                    }
+                    // console.log("Mise a jour des donnes reussi !!!")
+                }
             }
         });
         return dataAnime;

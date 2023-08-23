@@ -1,6 +1,6 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const { page, DLinks, ELinks  } = require('../../Liens/AnimeLink');
+const { page, DLinks, ELinks, Domaine  } = require('../../Liens/AnimeLink');
 const { AnimeByPM } = require('../../Model/AnimesModel/AnimeByPageModel');
 
 
@@ -8,7 +8,8 @@ const { AnimeByPM } = require('../../Model/AnimesModel/AnimeByPageModel');
 async function AnimeByAlpha(id, dataAnime = []) {
 
     for(i of page){
-        if(id === i.Caractere){
+        const mod = id?.toUpperCase();
+        if(mod === i.Caractere){
             id = i.value;
             try{
         
@@ -19,7 +20,8 @@ async function AnimeByAlpha(id, dataAnime = []) {
                  const AnimeId = $(rek).find('td center div a').attr('href').match(/(\d+)/gm).toString();
                  const titre = $(rek).find('td center span').text();
                  const image = $(rek).find('td center div').css('background').match(/http.*(jpg|png|jpeg|webp)/gm).toString();
-                 const lien = $(rek).find('td center div a').attr('href');
+                 const lienNonCOmplet = $(rek).find('td center div a').attr('href');
+                 const lien = `${Domaine}${lienNonCOmplet}`;
                  const episode = $(rek).find('td[width="40%"] font[color="#FF4500"]').text();
                  const type = $(rek).find('td[width="25%"] font[color="#008080"]').text();
          

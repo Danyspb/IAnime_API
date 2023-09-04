@@ -5,7 +5,6 @@ const { Top30Model } = require('../../Model/AnimesModel/Top30Model');
 
 
 
-
 async function LesTop30Animes(dataAnime = []) {
     try {
         const donnes = await axios.get(TopAnime);

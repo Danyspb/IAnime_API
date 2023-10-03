@@ -24,20 +24,17 @@ app.use(`/`,anime );
 
 
 
-/////////////////////  mettre votre donnes dans une base de donnes du cluster mais il duplicate les donnes ////////////////// /////
-// mongose.connect('mongodb+srv://danyspb4ever:4ExpbNbI5gRn5y6z@ianimecluster.1ev9i6f.mongodb.net/?retryWrites=true&w=majority')
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 /////////////// si vous decommenter cette partie les donnnes scrapper iront dans votre base de donne comme l'exemple ci-dessous  ////////////////
-mongose.connect('mongodb://127.0.0.1:27017/Ianime')
+//mongose.connect('mongodb://127.0.0.1:27017/Ianime')
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-.then(() => {
-    console.log('Connection a la base de donne OK!!!');
-})
-.catch((err) => {
-    console.log(err);
-})
+// .then(() => {
+//     console.log('Connection a la base de donne OK!!!');
+// })
+// .catch((err) => {
+//     console.log(err);
+// })
 
 
 

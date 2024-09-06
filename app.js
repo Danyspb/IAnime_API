@@ -23,18 +23,15 @@ app.use(morgan('tiny'));
 app.use(`/`,anime );
 
 
-
-
-
 /////////////// si vous decommenter cette partie les donnnes scrapper iront dans votre base de donne comme l'exemple ci-dessous  ////////////////
-//mongose.connect('mongodb://127.0.0.1:27017/Ianime')
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// .then(() => {
-//     console.log('Connection a la base de donne OK!!!');
-// })
-// .catch((err) => {
-//     console.log(err);
-// })
+mongose.connect('mongodb://127.0.0.1:27017/Ianime')
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.then(() => {
+    console.log('Connection a la base de donne OK!!!');
+})
+.catch((err) => {
+    console.log(err);
+})
 
 
 
@@ -47,5 +44,5 @@ app.get('/', (req, res)=>{
 
 
 app.listen(3000, ()=>[
-    console.log("server is running well !!")
+    console.log("server is running well on the port 3000 !!")
 ])
